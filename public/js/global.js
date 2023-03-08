@@ -1,3 +1,14 @@
+enviando = false; //Obligaremos a entrar el if en el primer submit
+
+function checkSubmit() {
+    if (!enviando) {
+        enviando= true;
+        return true;
+    } else {
+        return false;
+    }
+}
+
 function punto_decimal(input){
     var num = input.value.replace(/\./g,'');
     if(!isNaN(num)){

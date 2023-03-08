@@ -19,7 +19,7 @@
             </div>
 
             <div class="col-xl-4 col-lg-4 col-sm-4">
-                <a class="btn btn-primary btn-rounded mb-2" href="{{route('persona.create')}}">Agregar</a>
+                <a class="btn btn-primary btn-rounded mb-2" href="{{route('paciente.create')}}">Agregar</a>
             </div>
         </div>
 
@@ -83,7 +83,12 @@
                                     <td>
                                         <a href="{{route('persona.edit', $item)}}"
                                         class="bs-popover" data-container="body" data-container="body" data-trigger="hover" data-placement="top" data-content="Editar Persona">
-                                            <i class="fas fa-user-edit"></i>
+                                            <i class="fas fa-user-edit mr-2"></i>
+                                        </a>
+
+                                        <a href="{{route('persona.edit', $item->id)}}"
+                                        class="bs-popover" data-container="body" data-container="body" data-trigger="hover" data-placement="top" data-content="Agendar Paciente">
+                                        <i class="fas fa-calendar-alt"></i>
                                         </a>
                                     </td>
 
@@ -104,7 +109,7 @@
 @section('js')
     <script src="{{asset('plugins/sweetalerts/sweetalert2.min.js')}}"></script>
     <script src="{{asset('plugins/sweetalerts/custom-sweetalert.js')}}"></script>
-    <script src="{{asset('assets/js/elements/popovers.js"')}}></script>
+    <script src="{{asset('assets/js/elements/popovers.js')}}"></script>
     <script src="{{asset('}plugins/table/datatable/datatables.js')}}"></script>
     <script>
         $('#zero-config').DataTable({

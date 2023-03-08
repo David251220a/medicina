@@ -21,6 +21,36 @@
             </a>
         </li>
 
+        <li class="menu">
+            <a href="{{ route('paciente.index') }}" {{(substr(Route::currentRouteName() , 0 , strpos(Route::currentRouteName(), '.')) == 'paciente' ? 'data-active=true' : '')}}
+                aria-expanded="false" class="dropdown-toggle">
+                <div class="">
+                    <i class="fas fa-user-injured mr-3"></i>
+                    <span>Paciente</span>
+                </div>
+            </a>
+        </li>
+
+        <li class="menu">
+            <a href="{{ route('doctor.index') }}" {{(substr(Route::currentRouteName() , 0 , strpos(Route::currentRouteName(), '.')) == 'doctor' ? 'data-active=true' : '')}}
+                aria-expanded="false" class="dropdown-toggle">
+                <div class="">
+                    <i class="fas fa-user-md mr-3"></i>
+                    <span>Doctor</span>
+                </div>
+            </a>
+        </li>
+
+        <li class="menu">
+            <a href="{{ route('especialidad.index') }}" {{(substr(Route::currentRouteName() , 0 , strpos(Route::currentRouteName(), '.')) == 'especialidad' ? 'data-active=true' : '')}}
+                aria-expanded="false" class="dropdown-toggle">
+                <div class="">
+                    <i class="fas fa-star-of-life mr-3"></i>
+                    <span>Especialidad</span>
+                </div>
+            </a>
+        </li>
+
     </ul>
     <!-- <div class="shadow-bottom"></div> -->
 

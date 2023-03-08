@@ -5,13 +5,14 @@ namespace App\Http\Livewire\Persona;
 use App\Models\Ciudad;
 use App\Models\Departamento;
 use App\Models\Pais;
+use App\Models\Persona;
 use Livewire\Component;
 
-class CreatePersona extends Component
+class EditarPersona extends Component
 {
     public $pais_id, $departamento_id = 0, $ciudad_id = 0, $descripcion_pais, $descripcion_departamento, $descripcion_ciudad;
     public $pais = [], $departamento = [], $ciudad = [];
-    public $nombre_pais, $nombre_departamento;
+    public $nombre_pais, $nombre_departamento, $persona;
 
     protected $listeners = ['updatedPais', 'updatedDepartamento', 'nombres'];
 
@@ -19,16 +20,22 @@ class CreatePersona extends Component
         'descripcion_pais' => 'required||unique:pais,descripcion',
     ];
 
-    public function mount()
+    public function mount(Persona $persona)
     {
+        $this->persona = $persona;
         $this->pais = Pais::all();
         if(empty($this->pais_id)){
-            $this->pais_id = 1;
+            $this->pais_id = $persona->pais_id;
         }
 
         $this->departamento = Departamento::where('pais_id', $this->pais_id)->get();
         if($this->departamento->count() > 0){
-            $this->departamento_id = $this->departamento[0]->id;
+            if(empty($this->departamento_id)){
+                $this->departamento_id = $persona->departamento_id;
+            }else{
+                $this->departamento_id = $this->departamento[0]->id;
+            }
+
         }else{
             $this->departamento_id = 0;
         }
@@ -38,7 +45,11 @@ class CreatePersona extends Component
         ->get();
 
         if($this->ciudad->count() > 0){
-            $this->ciudad_id = $this->ciudad[0]->id;
+            if(empty($this->ciudad_id)){
+                $this->ciudad_id = $persona->ciudad_id;
+            }else{
+                $this->ciudad_id = $this->ciudad[0]->id;
+            }
         }else{
             $this->ciudad_id = 0;
         }
@@ -81,7 +92,7 @@ class CreatePersona extends Component
 
     public function render()
     {
-        return view('livewire.persona.create-persona');
+        return view('livewire.persona.editar-persona');
     }
 
     public function save()
@@ -110,7 +121,7 @@ class CreatePersona extends Component
             'usuario_modificacion' => auth()->user()->id,
         ]);
 
-        $this->mount();
+        $this->mount($this->persona);
         $this->reset('descripcion_pais');
         $this->emit('pais-add', 'Pais Agregado');
     }

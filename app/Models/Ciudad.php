@@ -10,4 +10,6 @@ class Ciudad extends Model
     use HasFactory;
 
     protected $table = 'ciudad';
+
+    protected $guarded = [];
 }

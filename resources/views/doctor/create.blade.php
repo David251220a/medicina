@@ -17,12 +17,12 @@
         <div class="col-lg-12 layout-spacing">
             <div class="widget-content widget-content-area">
                 <div class="row" style="margin-left: 3px">
-                    <h3 class="mb-4">Agregar Persona</h3>
+                    <h3 class="mb-4">Agregar Doctor</h3>
                 </div>
-                <form class="needs-validation" novalidate action="{{route('persona.store')}}" method="POST" onsubmit="return checkSubmit();">
+                <form class="needs-validation" novalidate action="{{route('doctor.store')}}" method="POST" onsubmit="return checkSubmit();">
                     @csrf
                     @include('ui.agregar_persona')
-                    <button class="btn btn-primary mt-3" type="submit">Grabar</button>
+                    <button class="btn btn-primary mt-3" type="submit">Grabar y Continuar</button>
                 </form>
             </div>
         </div>
@@ -32,8 +32,6 @@
 @endsection
 
 @section('js')
-    <script src="{{asset('plugins/highlight/highlight.pack.js')}}"></script>
-    <script src="{{asset('assets/js/custom.js')}}"></script>
     <script src="{{asset('js/pais/index.js')}}"></script>
     <script src="{{asset('plugins/sweetalerts/sweetalert2.min.js')}}"></script>
     <script src="{{asset('plugins/sweetalerts/custom-sweetalert.js')}}"></script>
@@ -42,6 +40,5 @@
     <!--  BEGIN CUSTOM SCRIPTS FILE  -->
     <script src="{{asset('assets/js/scrollspyNav.js')}}"></script>
     <script src="{{asset('assets/js/forms/bootstrap_validation/bs_validation_script.js')}}"></script>
-    {{-- <script src="{{asset('plugins/select2/select2.min.js')}}"></script>
-    <script src="{{asset('plugins/select2/custom-select2.js')}}"></script> --}}
+
 @endsection

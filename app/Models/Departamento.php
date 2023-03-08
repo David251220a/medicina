@@ -10,4 +10,10 @@ class Departamento extends Model
     use HasFactory;
 
     protected $table = 'departamento';
+
+    protected $guarded = [];
+
+    public function ciudad(){
+        return $this->hasMany(Ciudad::class, 'departamento_id');
+    }
 }

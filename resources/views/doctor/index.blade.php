@@ -19,7 +19,7 @@
             </div>
 
             <div class="col-xl-4 col-lg-4 col-sm-4">
-                <a class="btn btn-primary btn-rounded mb-2" href="{{route('persona.create')}}">Agregar</a>
+                <a class="btn btn-primary btn-rounded mb-2" href="{{route('doctor.create')}}">Agregar</a>
             </div>
         </div>
 
@@ -33,16 +33,14 @@
                                 <th>Documento</th>
                                 <th>Nombre y Apellido</th>
                                 <th>Sexo</th>
-                                <th>Edad</th>
+                                <th>Especialidad</th>
                                 <th>Celular</th>
-                                <th>Dirección</th>
                                 <th>Estado</th>
                                 <th class="no-content"></th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($data as $item)
-                                <tr>
                                     <td style="text-align: right">{{number_format($item->documento, 0, ".", ".")}}</td>
                                     <td>{{$item->nombre}} {{$item->apellido}}</td>
                                     <td>
@@ -61,18 +59,8 @@
                                         @endif
                                         {{$sexo}}
                                     </td>
-                                    <td>
-                                        @php
-                                            $año = date('Y', strtotime($item->fecha_nacimiento));
-                                            $mes = date('m', strtotime($item->fecha_nacimiento));
-                                            $dia = date('d', strtotime($item->fecha_nacimiento));
-
-                                            $edad = Carbon\Carbon::createFromDate($año,$mes,$dia)->age;
-                                        @endphp
-                                        {{($edad)}}
-                                    </td>
+                                    <td></td>
                                     <td>{{$item->celular}}</td>
-                                    <td>{{$item->direccion}}</td>
                                     <td>
                                         @if ($item->estado_id == 1)
                                             <i class="fas fa-circle" style="color:green"></i>
@@ -83,11 +71,14 @@
                                     <td>
                                         <a href="{{route('persona.edit', $item)}}"
                                         class="bs-popover" data-container="body" data-container="body" data-trigger="hover" data-placement="top" data-content="Editar Persona">
-                                            <i class="fas fa-user-edit"></i>
+                                            <i class="fas fa-user-edit mr-3"></i>
+                                        </a>
+
+                                        <a href="{{route('doctor.asignar_especialidad', $item->doctor_id)}}"
+                                        class="bs-popover" data-container="body" data-container="body" data-trigger="hover" data-placement="top" data-content="Asignar Especialidad">
+                                        <i class="fas fa-stethoscope"></i>
                                         </a>
                                     </td>
-
-                                </tr>
                             @endforeach
                         </tbody>
 
@@ -104,7 +95,7 @@
 @section('js')
     <script src="{{asset('plugins/sweetalerts/sweetalert2.min.js')}}"></script>
     <script src="{{asset('plugins/sweetalerts/custom-sweetalert.js')}}"></script>
-    <script src="{{asset('assets/js/elements/popovers.js"')}}></script>
+    <script src="{{asset('assets/js/elements/popovers.js"')}}"></script>
     <script src="{{asset('}plugins/table/datatable/datatables.js')}}"></script>
     <script>
         $('#zero-config').DataTable({

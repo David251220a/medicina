@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('especialidad', function (Blueprint $table) {
             $table->id();
             $table->string('descripcion', 100);
+            $table->integer('limite_atencion')->default(0);
             $table->string('foto')->nullable();
             $table->foreignId('estado_id')->references('id')->on('estado');
             $table->foreignId('usuario_alta')->references('id')->on('users');

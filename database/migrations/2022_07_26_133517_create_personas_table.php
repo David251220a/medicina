@@ -29,7 +29,7 @@ return new class extends Migration
             $table->string('celular', 12)->nullable();
             $table->string('direccion_laboral', 200)->nullable();
             $table->string('telefono_laboral', 12)->nullable();
-            $table->boolean('fallecido')->default(false);
+            $table->integer('fallecido')->default(0);
             $table->string('motivo_inactivo', 200)->nullable();
             $table->foreignId('estado_id')->references('id')->on('estado');
             $table->foreignId('usuario_alta')->references('id')->on('users');

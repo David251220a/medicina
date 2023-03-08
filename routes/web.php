@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\EspecialidadController;
 use App\Http\Controllers\InicioController;
+use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\PersonaController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -29,5 +32,10 @@ Route::group([
 ], function(){
     Route::get('/home', [InicioController::class, 'index'])->name('home');
     Route::resource('/personas', PersonaController::class)->names('persona');
+    Route::resource('/pacientes', PacienteController::class)->names('paciente');
+    Route::resource('/doctors', DoctorController::class)->names('doctor');
+    Route::resource('/especialidads', EspecialidadController::class)->names('especialidad');
+
+    Route::get('/doctors/espacialidad/{doctor}', [DoctorController::class, 'asignar_especialidad'])->name('doctor.asignar_especialidad');
 });
 

@@ -24,14 +24,6 @@
         </select>
     </div>
 
-    <div class="col-md-3 col-sm-6 mb-4">
-        <label for="">Barrio</label>
-        <input type="text" class="form-control" id="barrio" name="barrio" placeholder="Barrio" required>
-        <div class="valid-feedback">
-            Looks good!
-        </div>
-    </div>
-
     @include('ui.modal.agregar_pais')
     @include('ui.modal.agregar_departamento')
     @include('ui.modal.agregar_ciudad')

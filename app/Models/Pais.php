@@ -16,4 +16,8 @@ class Pais extends Model
     public function estado(){
         return $this->belongsTo(Estado::class, 'estado_id');
     }
+
+    public function departamento(){
+        return $this->hasMany(Departamento::class, 'pais_id');
+    }
 }

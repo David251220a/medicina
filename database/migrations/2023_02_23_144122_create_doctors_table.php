@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('doctor', function (Blueprint $table) {
             $table->id();
             $table->foreignId('persona_id')->references('id')->on('persona');
-            $table->integer('limite_atencion')->default(0);
+            $table->foreignId('especialidad_id')->references('id')->on('especialidad');
+            // $table->integer('limite_atencion')->default(0);
             $table->foreignId('estado_id')->references('id')->on('estado');
             $table->foreignId('usuario_alta')->references('id')->on('users');
             $table->foreignId('usuario_modificacion')->references('id')->on('users');

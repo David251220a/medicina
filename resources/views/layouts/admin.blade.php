@@ -61,9 +61,15 @@
 
                 @endif
 
-                @if(session()->has('message'))
+                {{-- @if(session()->has('message'))
                     <input type="hidden" id="message" value="{{ session()->get('message') }}">
-                @endif
+                @endif --}}
+                @if(session()->has('message'))
+                    <div class="mb-6 mt-10" style="border: lightgreen 2px solid; margin-top:25px;border-radius:25px
+                    ;padding-bottom:5px;padding-top:5px;margin-left:5px;background:lightgreen; color:white;font-size:20px">
+                        {{ session()->get('message') }}
+                    </div>
+            @endif
 
                 @yield('content')
 
