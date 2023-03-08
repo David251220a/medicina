@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Doctor;
+use App\Models\Doctor_Turno;
 use App\Models\Especialidad;
 use App\Models\Estado_Civil;
 use App\Models\Persona;
@@ -86,5 +87,32 @@ class DoctorController extends Controller
         $especialidad = Especialidad::where('estado_id', 1)->orderBy('descripcion', 'ASC')->get();
         $dias = $this->saber_dia();
         return view('doctor.especialidad', compact('doctor', 'especialidad', 'dias'));
+    }
+
+    public function asignar_especialidad_store(Doctor $doctor, Request $request)
+    {
+
+        $doctor->update([
+            'especialidad_id' => $request->especialidad_id,
+            'usuario_modificacion' => auth()->user()->id,
+        ]);
+
+        $dias = $request->dias;
+        $hora_desde = $request->hora_desde;
+        $hora_hasta = $request->hora_hasta;
+
+        for ($i=0; $i < count($dias); $i++) {
+            Doctor_Turno::create([
+                'doctor_id' => $doctor->id,
+                'dia'  => $dias[$i],
+                'hora_desde' => $hora_desde[$i],
+                'hora_hasta' => $hora_hasta[$i],
+                'estado_id' => 1,
+                'usuario_alta' => auth()->user()->id,
+                'usuario_modificacion' => auth()->user()->id,
+            ]);
+        }
+
+        return redirect()->route('doctor.index')->with('message', 'Se ha asignado el horario con exito!.');
     }
 }

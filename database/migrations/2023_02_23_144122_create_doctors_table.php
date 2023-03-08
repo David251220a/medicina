@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('persona_id')->references('id')->on('persona');
             $table->foreignId('especialidad_id')->references('id')->on('especialidad');
-            // $table->integer('limite_atencion')->default(0);
+            $table->integer('limite_atencion')->default(0);
             $table->foreignId('estado_id')->references('id')->on('estado');
             $table->foreignId('usuario_alta')->references('id')->on('users');
             $table->foreignId('usuario_modificacion')->references('id')->on('users');

@@ -37,5 +37,6 @@ Route::group([
     Route::resource('/especialidads', EspecialidadController::class)->names('especialidad');
 
     Route::get('/doctors/espacialidad/{doctor}', [DoctorController::class, 'asignar_especialidad'])->name('doctor.asignar_especialidad');
+    Route::post('/doctors/espacialidad/{doctor}', [DoctorController::class, 'asignar_especialidad_store'])->name('doctor.asignar_especialidad_store');
 });
 
