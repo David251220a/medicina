@@ -16,7 +16,7 @@ class CreatePersona extends Component
     protected $listeners = ['updatedPais', 'updatedDepartamento', 'nombres'];
 
     protected $rules = [
-        'descripcion_pais' => 'required||unique:pais,descripcion',
+        'descripcion_pais' => 'required|unique:pais,descripcion',
     ];
 
     public function mount()

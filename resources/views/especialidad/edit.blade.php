@@ -12,8 +12,7 @@
                 <div class="row" style="margin-left: 3px">
                     <h3 class="mb-4">Editar Especialidad: {{$especialidad->descripcion}}</h3>
                 </div>
-                <form class="needs-validation" novalidate action="{{route('especialidad.update', $especialidad)}}" method="POST" enctype="multipart/form-data"
-                onsubmit="return checkSubmit();">
+                <form class="needs-validation" novalidate action="{{route('especialidad.update', $especialidad)}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="form-row">

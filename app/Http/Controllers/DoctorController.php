@@ -96,14 +96,25 @@ class DoctorController extends Controller
             'especialidad_id' => $request->especialidad_id,
             'usuario_modificacion' => auth()->user()->id,
         ]);
-
         $dias = $request->dias;
         $hora_desde = $request->hora_desde;
         $hora_hasta = $request->hora_hasta;
 
+        $turnos = Doctor_Turno::where('doctor_id', $doctor->id)->get();
+        foreach($turnos as $item){
+            $item->update([
+                'estado_id' => 2,
+            ]);
+        }
+
         for ($i=0; $i < count($dias); $i++) {
-            Doctor_Turno::create([
+            Doctor_Turno::updateOrCreate([
                 'doctor_id' => $doctor->id,
+                'dia' => $dias[$i],
+            ]
+            , [
+                'doctor_id' => $doctor->id,
+                'especialidad_id' => $request->especialidad_id,
                 'dia'  => $dias[$i],
                 'hora_desde' => $hora_desde[$i],
                 'hora_hasta' => $hora_hasta[$i],

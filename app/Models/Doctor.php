@@ -20,4 +20,9 @@ class Doctor extends Model
     public function turnos(){
         return $this->hasMany(Doctor_Turno::class, 'doctor_id')->where('estado_id', 1)->orderBy('dia', 'ASC');
     }
+
+    public function especialista()
+    {
+        return $this->belongsTo(Especialidad::class, 'especialidad_id');
+    }
 }

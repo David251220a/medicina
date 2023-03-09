@@ -13,7 +13,7 @@
                     <h3 class="mb-4">Agregar Especialidad</h3>
                 </div>
                 <form class="needs-validation" novalidate action="{{route('especialidad.store')}}" method="POST"
-                 enctype="multipart/form-data" onsubmit="return checkSubmit();">
+                 enctype="multipart/form-data">
                     @csrf
                     <div class="form-row">
                         <div class="col-md-3 col-sm-6 mb-4">

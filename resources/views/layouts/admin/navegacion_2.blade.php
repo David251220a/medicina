@@ -8,7 +8,7 @@
 
                     <nav class="breadcrumb-one" aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0);">{{ str_replace('.', '/', Str::upper(Route::currentRouteName()))}}</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">{{ Str::upper(substr(Route::currentRouteName() , strpos(Route::currentRouteName(), '.') + 1, 100))}}</a></li>
                         </ol>
                     </nav>
 

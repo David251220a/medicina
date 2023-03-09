@@ -14,6 +14,6 @@ class Paciente extends Model
     protected $guarded = [];
 
     public function persona(){
-        return $this->hasOne('id', 'persona_id');
+        return $this->belongsTo(Persona::class, 'persona_id');
     }
 }

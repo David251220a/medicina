@@ -12,4 +12,8 @@ class Doctor_Turno extends Model
     protected $table = 'doctor_turno';
 
     protected $guarded = [];
+
+    public function doctor(){
+        return $this->belongsTo(Doctor::class, 'doctor_id');
+    }
 }

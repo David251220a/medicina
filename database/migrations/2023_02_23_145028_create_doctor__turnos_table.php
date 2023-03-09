@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('doctor_turno', function (Blueprint $table) {
             $table->id();
             $table->foreignId('doctor_id')->references('id')->on('doctor');
+            $table->foreignId('especialidad_id')->references('id')->on('especialidad');
             $table->integer('dia')->default(0);
             $table->time('hora_desde');
             $table->time('hora_hasta');

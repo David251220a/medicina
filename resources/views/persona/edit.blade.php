@@ -19,8 +19,7 @@
                 <div class="row" style="margin-left: 3px">
                     <h3 class="mb-4">Editar Persona: {{$persona->nombre}} {{$persona->apellido}}</h3>
                 </div>
-                <form class="needs-validation" novalidate action="{{route('persona.update', $persona)}}" method="POST"
-                onsubmit="return checkSubmit();">
+                <form class="needs-validation" novalidate action="{{route('persona.update', $persona)}}" method="POST">
                     @method('PUT')
                     @csrf
                     <div class="form-row">

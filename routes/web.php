@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AgendaConsultaController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\EspecialidadController;
@@ -38,5 +39,9 @@ Route::group([
 
     Route::get('/doctors/espacialidad/{doctor}', [DoctorController::class, 'asignar_especialidad'])->name('doctor.asignar_especialidad');
     Route::post('/doctors/espacialidad/{doctor}', [DoctorController::class, 'asignar_especialidad_store'])->name('doctor.asignar_especialidad_store');
+    Route::get('/agenda/consulta', [AgendaConsultaController::class, 'index'])->name('agenda_consulta.index');
+    Route::get('/agenda/consulta/{especialidad}/especialidad', [AgendaConsultaController::class, 'especialidad'])->name('agenda_consulta.especialidad');
+    Route::post('/agenda/consulta/{especialidad}/especialidad', [AgendaConsultaController::class, 'especialidad_store'])->name('agenda_consulta.especialidad_store');
+    Route::get('/agendado/{agendaConsulta}', [AgendaConsultaController::class, 'agendado'])->name('agenda_consulta.agendado');
 });
 

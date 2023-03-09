@@ -19,7 +19,7 @@
                 <div class="row" style="margin-left: 3px">
                     <h3 class="mb-4">Agregar Persona</h3>
                 </div>
-                <form class="needs-validation" novalidate action="{{route('persona.store')}}" method="POST" onsubmit="return checkSubmit();">
+                <form class="needs-validation" novalidate action="{{route('persona.store')}}" method="POST">
                     @csrf
                     @include('ui.agregar_persona')
                     <button class="btn btn-primary mt-3" type="submit">Grabar</button>

@@ -15,7 +15,7 @@
     <div class="row layout-top-spacing">
         <div class="col-lg-12 layout-spacing">
 
-            <form class="needs-validation" novalidate action="{{route('doctor.asignar_especialidad_store', $doctor)}}" method="POST" onsubmit="return checkSubmit();">
+            <form class="needs-validation" novalidate action="{{route('doctor.asignar_especialidad_store', $doctor)}}" method="POST">
                 @csrf
 
                 <div class="widget-content widget-content-area">

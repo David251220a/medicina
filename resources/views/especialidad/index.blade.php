@@ -44,6 +44,7 @@
                             <tr>
                                 <th>ID#</th>
                                 <th>Descripción</th>
+                                <th>Limite Atención</th>
                                 <th class="no-content"></th>
                             </tr>
                         </thead>
@@ -52,6 +53,7 @@
                                 <tr>
                                     <td>{{$item->id}}</td>
                                     <td>{{$item->descripcion}}</td>
+                                    <td style="text-align: right">{{$item->limite_atencion}}</td>
                                     <td>
                                         <a href="{{route('especialidad.edit', $item)}}"
                                         class="bs-popover" data-container="body" data-container="body" data-trigger="hover" data-placement="top" data-content="Editar">
