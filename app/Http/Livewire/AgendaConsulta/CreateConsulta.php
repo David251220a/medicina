@@ -4,6 +4,7 @@ namespace App\Http\Livewire\AgendaConsulta;
 
 use App\Models\Doctor_Turno;
 use App\Models\Especialidad;
+use App\Models\Paciente;
 use App\Models\Persona;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -14,13 +15,14 @@ class CreateConsulta extends Component
     public $especialidad_id, $fecha, $doctor, $paciente_id, $paciente_nombre, $documento_paciente, $limite_atencion
     , $error_persona, $dia, $error_fecha, $doctor_id;
 
-    public $documento, $nombre, $apellido, $fecha_nacimiento, $direccion, $barrio, $sexo;
-    protected $listeners = ['buscar_persona', 'doctor_disponible'];
+    public $documento, $nombre, $apellido, $fecha_nacimiento, $direccion, $barrio, $sexo, $celular;
+    protected $listeners = ['buscar_persona', 'doctor_disponible', 'resetUI', 'save'];
 
     protected $rules = [
         'documento' => 'required|unique:persona,documento',
         'nombre' => 'required',
         'apellido' => 'required',
+        'fecha_nacimiento' => 'required',
         'sexo' => 'required',
         'direccion' => 'required',
         'barrio' => 'required'
@@ -59,6 +61,7 @@ class CreateConsulta extends Component
         }else{
             $this->paciente_nombre ='';
         }
+        $this->emit('reloadClassCSs');
     }
 
     public function doctor_disponible()
@@ -69,12 +72,13 @@ class CreateConsulta extends Component
             $this->error_fecha = 'Debe elegir una mayor o igual a la fecha actual!';
         }else{
             $this->saber_dia();
-            $this->doctor = Doctor_Turno::select('doctor_turno.*', DB::raw('(SELECT COUNT(z.persona_id) FROM agenda_consulta AS z WHERE z.fecha_consulta = '.$this->fecha.' AND z.doctor_turno_id = doctor_turno.id AND z.estado_id = 1) AS cont'))
+            $this->doctor = Doctor_Turno::select('doctor_turno.*', DB::raw('(SELECT COUNT(z.paciente_id) FROM agenda_consulta AS z WHERE z.fecha_consulta = '.$this->fecha.' AND z.doctor_turno_id = doctor_turno.id AND z.estado_id = 1) AS cont'))
             ->where('estado_id', 1)
             ->where('dia', $this->dia)
             ->where('especialidad_id', $this->especialidad_id)
             ->get();
             $this->error_fecha = '';
+            $this->emit('reloadClassCSs');
         }
     }
 
@@ -108,16 +112,56 @@ class CreateConsulta extends Component
 
     public function save()
     {
+        // dd("que pdo");
         $this->validate();
+        $persona = Persona::create([
+            'documento' => $this->documento,
+            'nombre' => $this->nombre,
+            'apellido' => $this->apellido,
+            'sexo' => $this->sexo,
+            'fecha_nacimiento' => $this->fecha_nacimiento,
+            'pais_id' => 1,
+            'departamento_id' => 1,
+            'ciudad_id' => 1,
+            'estado_civil_id' => 3,
+            'barrio' => $this->barrio,
+            'direccion' => $this->direccion,
+            'celular' => $this->celular,
+            'direccion_laboral' => '',
+            'telefono_laboral' => '',
+            'fallecido' => 0,
+            'motivo_inactivo' => '',
+            'estado_id' => 1,
+            'usuario_alta' => auth()->user()->id,
+            'usuario_modificacion' => auth()->user()->id,
+        ]);
 
+        $paciente = Paciente::create([
+            'persona_id' => $persona->id,
+            'estatura' => '0',
+            'peso' => 0,
+            'estado_id' => 1,
+            'usuario_alta' => auth()->user()->id,
+            'usuario_modificacion' => auth()->user()->id,
+        ]);
+        $this->paciente_id = $paciente->id;
+        $this->documento_paciente = $persona->documento;
+        $this->paciente_nombre = $persona->nombre . ' ' . $persona->apellido;
+        $this->resetUI();
+        $this->emit('persona-add', 'Paciente Agregado');
     }
 
     public function resetUI()
     {
-        $this->reset('descripcion_pais');
-        $this->reset('descripcion_departamento');
-        $this->reset('descripcion_ciudad');
-        // $this->emit('reloadClassCSs');
+        $this->reset('documento');
+        $this->reset('nombre');
+        $this->reset('apellido');
+        $this->reset('sexo');
+        $this->reset('fecha_nacimiento');
+        $this->reset('direccion');
+        $this->reset('barrio');
+        $this->reset('celular');
+        $this->emit('reloadClassCSs');
     }
 
 }
