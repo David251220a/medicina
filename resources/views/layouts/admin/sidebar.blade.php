@@ -61,6 +61,16 @@
             </a>
         </li>
 
+        <li class="menu">
+            <a href="{{ route('doctor_consulta.index') }}" {{(substr(Route::currentRouteName() , 0 , strpos(Route::currentRouteName(), '.')) == 'doctor_consulta' ? 'data-active=true' : '')}}
+                aria-expanded="false" class="dropdown-toggle">
+                <div class="">
+                    <i class="fas fa-stethoscope mr-3"></i>
+                    <span>Doctor M.</span>
+                </div>
+            </a>
+        </li>
+
     </ul>
     <!-- <div class="shadow-bottom"></div> -->
 

@@ -38,14 +38,23 @@
         <div class="col-md-3 col-sm-6 mb-2">
             <label for="">Doctor</label>
             <select class="form-control" name="doctor_turno_id" required>
+                @php
+                    $hay_doctores = 0;
+                @endphp
                 @if (count($doctor) > 0)
                     @foreach ($doctor as $item)
                         @if ($item->cont < $limite_atencion)
                             <option value="{{$item->id}}">{{$item->cont}} - {{$item->doctor->persona->nombre}} {{$item->doctor->persona->apellido}}</option>
+                            @php
+                                $hay_doctores = 1;
+                            @endphp
                         @endif
                     @endforeach
+                    @if ($hay_doctores == 0)
+                        <option value="" selected>No hay doctores disponible en esta fecha!</option>
+                    @endif
                 @else
-                    <option value="">No hay doctores disponible en esta fecha!</option>
+                    <option value="" selected>No hay doctores disponible en esta fecha!</option>
                 @endif
 
             </select>

@@ -23,4 +23,9 @@ class AgendaConsulta extends Model
         return $this->belongsTo(Doctor_Turno::class, 'doctor_turno_id');
     }
 
+    public function estado_consulta()
+    {
+        return $this->belongsTo(EstadoConsulta::class, 'estado_consulta_id');
+    }
+
 }

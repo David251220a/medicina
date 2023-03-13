@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AgendaConsultaController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\DoctorConsultaController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\EspecialidadController;
 use App\Http\Controllers\InicioController;
@@ -43,5 +44,7 @@ Route::group([
     Route::get('/agenda/consulta/{especialidad}/especialidad', [AgendaConsultaController::class, 'especialidad'])->name('agenda_consulta.especialidad');
     Route::post('/agenda/consulta/{especialidad}/especialidad', [AgendaConsultaController::class, 'especialidad_store'])->name('agenda_consulta.especialidad_store');
     Route::get('/agendado/{agendaConsulta}', [AgendaConsultaController::class, 'agendado'])->name('agenda_consulta.agendado');
+    Route::get('/doctor/consulta', [DoctorConsultaController::class, 'index'])->name('doctor_consulta.index');
+    Route::get('/doctor/consulta/{agenda_consulta}/paciente', [DoctorConsultaController::class, 'atender'])->name('doctor_consulta.atender');
 });
 

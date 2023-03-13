@@ -41,6 +41,7 @@
                         </thead>
                         <tbody>
                             @foreach ($data as $item)
+                                <tr>
                                     <td style="text-align: right">{{number_format($item->documento, 0, ".", ".")}}</td>
                                     <td>{{$item->nombre}} {{$item->apellido}}</td>
                                     <td>
@@ -79,6 +80,7 @@
                                         <i class="fas fa-stethoscope"></i>
                                         </a>
                                     </td>
+                                </tr>
                             @endforeach
                         </tbody>
 

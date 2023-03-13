@@ -72,7 +72,14 @@ class CreateConsulta extends Component
             $this->error_fecha = 'Debe elegir una mayor o igual a la fecha actual!';
         }else{
             $this->saber_dia();
-            $this->doctor = Doctor_Turno::select('doctor_turno.*', DB::raw('(SELECT COUNT(z.paciente_id) FROM agenda_consulta AS z WHERE z.fecha_consulta = '.$this->fecha.' AND z.doctor_turno_id = doctor_turno.id AND z.estado_id = 1) AS cont'))
+            $this->doctor = Doctor_Turno::select('doctor_turno.*'
+            , DB::raw('(
+                SELECT
+                    COUNT(z.paciente_id)
+                FROM agenda_consulta AS z
+                WHERE CAST(z.fecha_consulta AS DATE) = CAST("'.$this->fecha.'" AS DATE)
+                AND z.doctor_turno_id = doctor_turno.id
+                AND z.estado_id = 1) AS cont'))
             ->where('estado_id', 1)
             ->where('dia', $this->dia)
             ->where('especialidad_id', $this->especialidad_id)
@@ -123,7 +130,7 @@ class CreateConsulta extends Component
             'pais_id' => 1,
             'departamento_id' => 1,
             'ciudad_id' => 1,
-            'estado_civil_id' => 3,
+            'estado_civil_id' => 1,
             'barrio' => $this->barrio,
             'direccion' => $this->direccion,
             'celular' => $this->celular,
