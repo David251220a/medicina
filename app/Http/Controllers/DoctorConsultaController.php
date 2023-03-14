@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AgendaConsulta;
 use App\Models\AgendaEstudio;
+use App\Models\EstadoConsulta;
 use App\Models\Persona;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -41,7 +42,8 @@ class DoctorConsultaController extends Controller
         $user = auth()->user();
         $doctor = Persona::where('documento', $user->documento)->first();
         $doctor = $doctor->doctor;
+        $estado_consulta = EstadoConsulta::all();
 
-        return view('doctor_consulta.atender', compact('agendaConsulta', 'doctor'));
+        return view('doctor_consulta.atender', compact('agendaConsulta', 'doctor', 'estado_consulta'));
     }
 }

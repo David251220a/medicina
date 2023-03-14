@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('tipo_estudio', function (Blueprint $table) {
             $table->id();
             $table->string('descripcion', 80);
-            $table->dateTime('tiempo_aproximado');
+            $table->integer('tiempo_aproximado')->default(0);
             $table->decimal('precio', 12, 0)->default(0);
             $table->foreignId('estado_id')->references('id')->on('estado');
             $table->foreignId('usuario_alta')->references('id')->on('users');
