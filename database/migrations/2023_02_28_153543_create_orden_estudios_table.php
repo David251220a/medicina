@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('orden_estudio', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('persona_id')->references('id')->on('persona');
+            $table->foreignId('paciente_id')->references('id')->on('paciente');
             $table->foreignId('doctor_id')->references('id')->on('doctor');
             $table->foreignId('tipo_estudio_id')->references('id')->on('tipo_estudio');
             $table->foreignId('consulta_id')->references('id')->on('consulta');
-            $table->string('observacion')->default(' ');
+            $table->string('observacion')->nullable();
             $table->foreignId('estado_id')->references('id')->on('estado');
             $table->foreignId('usuario_alta')->references('id')->on('users');
             $table->foreignId('usuario_modificacion')->references('id')->on('users');

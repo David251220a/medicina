@@ -77,33 +77,36 @@ function agregar_semana(){
         document.getElementById('mensaje_desde').style.display = "none";
     }
 
-    let valido = verificar_cargados_dias(dia);
-    if(valido == true){
-        return false;
-    }
-
-    aux_dias(3, dia);
+    // let valido = verificar_cargados_dias(dia);
+    // if(valido == true){
+    //     return false;
+    // }
 
     for (let index = 1; index <= 7; index++) {
         nombre_dia = saber_dia(index);
-        document.getElementById("body_horario").insertRow(-1).innerHTML = '<tr>\
-                                                                                <td class"text-center"> \
-                                                                                    <input type="hidden" class="" name="dias[]" value="'+index+'"> \
-                                                                                   '+nombre_dia+' \
-                                                                                </td>\
-                                                                                <td class"text-center"> \
-                                                                                    <input type="time" class="form-control" name="hora_desde[]" value="'+hora_desde+'" style="display: none" readonly> \
-                                                                                    '+hora_desde+' \
-                                                                                </td>\
-                                                                                <td class"text-center"> \
-                                                                                    <input type="time" class="form-control" name="hora_hasta[]" value="'+hora_hasta+'" style="display: none" readonly> \
-                                                                                    '+hora_hasta+' \
-                                                                                </td>\
-                                                                                <td class"text-center"> \
-                                                                                    <button id="'+dia+'" type="button" onclick="eliminar_fila(this)"><i class="fas fa-backspace"></i></button> \
-                                                                                </td>\
-                                                                            </tr>';
+        let se_carga = cargar(index);
+        if(se_carga == true){
+            document.getElementById("body_horario").insertRow(-1).innerHTML = '<tr>\
+                                                                                    <td class"text-center"> \
+                                                                                        <input type="hidden" class="" name="dias[]" value="'+index+'"> \
+                                                                                    '+nombre_dia+' \
+                                                                                    </td>\
+                                                                                    <td class"text-center"> \
+                                                                                        <input type="time" class="form-control" name="hora_desde[]" value="'+hora_desde+'" style="display: none" readonly> \
+                                                                                        '+hora_desde+' \
+                                                                                    </td>\
+                                                                                    <td class"text-center"> \
+                                                                                        <input type="time" class="form-control" name="hora_hasta[]" value="'+hora_hasta+'" style="display: none" readonly> \
+                                                                                        '+hora_hasta+' \
+                                                                                    </td>\
+                                                                                    <td class"text-center"> \
+                                                                                        <button id="'+dia+'" type="button" onclick="eliminar_fila(this)"><i class="fas fa-backspace"></i></button> \
+                                                                                    </td>\
+                                                                                </tr>';
+        }
     }
+
+    aux_dias(3, dia);
 }
 
 function saber_dia(dia){
@@ -223,7 +226,6 @@ function aux_dias(modo, dia){
 
 }
 
-
 function verificar_cargados_dias(dia){
     dia = parseInt(dia);
     if (dia == 1){
@@ -279,7 +281,6 @@ function verificar_cargados_dias(dia){
     return false
 }
 
-
 function recorrer_fila(){
 
     var resume_table = document.getElementById("body_horario");
@@ -317,5 +318,65 @@ function verificar(dia){
     }
     if(dia == 'SABADO'){
         sabado = 1;
+    }
+
+}
+
+
+function cargar(dia){
+    if(dia == 1){
+        if(domingo == 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    if(dia == 2){
+        if(lunes == 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    if(dia == 3){
+        if(martes == 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    if(dia == 4){
+        if(miercoles == 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    if(dia == 5){
+        if(jueves == 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    if(dia == 6){
+        if(viernes == 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    if(dia == 7){
+        if(sabado == 0){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

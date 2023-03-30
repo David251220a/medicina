@@ -16,7 +16,10 @@
         <div class="row" style="margin-top: 15px">
             <div class="col-lg-4 col-md-12 col-sm-12 mb-2" style="line-height: 12px">
                 <p style="font-size: 23px">Doctor: <b>{{$doctor->persona->nombre}} {{$doctor->persona->apellido}}</b></p>
-                <br>
+
+            </div>
+
+            <div class="col-lg-4 col-md-12 col-sm-12 mb-2" style="line-height: 12px">
                 <p style="font-size: 23px">Especialidad: <b>{{$doctor->especialista->descripcion}}</b></p>
             </div>
 

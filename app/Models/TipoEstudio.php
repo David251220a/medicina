@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class TipoEstudio extends Model
 {
     use HasFactory;
+
+    protected $table = 'tipo_estudio';
 }

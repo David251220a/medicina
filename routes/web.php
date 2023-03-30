@@ -46,5 +46,7 @@ Route::group([
     Route::get('/agendado/{agendaConsulta}', [AgendaConsultaController::class, 'agendado'])->name('agenda_consulta.agendado');
     Route::get('/doctor/consulta', [DoctorConsultaController::class, 'index'])->name('doctor_consulta.index');
     Route::get('/doctor/consulta/{agenda_consulta}/paciente', [DoctorConsultaController::class, 'atender'])->name('doctor_consulta.atender');
+    Route::post('/doctor/consulta/paciente', [DoctorConsultaController::class, 'store'])->name('doctor_consulta.store');
+    Route::get('/doctor/consulta/{consulta}/atendido', [DoctorConsultaController::class, 'atendido'])->name('doctor_consulta.atendido');
 });
 

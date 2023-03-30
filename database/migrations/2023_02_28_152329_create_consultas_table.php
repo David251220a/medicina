@@ -15,16 +15,15 @@ return new class extends Migration
     {
         Schema::create('consulta', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('persona_id')->references('id')->on('persona');
+            $table->foreignId('paciente_id')->references('id')->on('paciente');
             $table->foreignId('doctor_turno_id')->references('id')->on('doctor_turno');
-            $table->foreignId('tipo_estudio_id')->references('id')->on('tipo_estudio');
             $table->foreignId('agenda_id')->references('id')->on('agenda_consulta');
             $table->string('diagnostico')->default(' ');
-            $table->string('instrucciones')->default(' ');
-            $table->string('receta')->default(' ');
-            $table->string('reposo')->default(' ');
-            $table->string('estatura', 5)->default(' ');
-            $table->integer('peso')->default(0);
+            $table->string('instrucciones')->nullable();
+            $table->string('receta')->nullable();
+            $table->string('reposo')->nullable();
+            $table->string('estatura', 5)->nullable();
+            $table->integer('peso')->nullable();
             $table->dateTime('fecha');
             $table->foreignId('estado_id')->references('id')->on('estado');
             $table->foreignId('usuario_alta')->references('id')->on('users');

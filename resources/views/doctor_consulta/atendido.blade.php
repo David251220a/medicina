@@ -9,57 +9,38 @@
 
     <div class="layout-px-spacing">
 
-        <div class="widget-content widget-content-area mb-4 mt-2">
-            <div class="row" style="margin-top: 15px">
-                <div class="col-lg-6 col-md-6 col-sm-12 mb-2" style="line-height: 12px">
-                    <p style="font-size: 23px">Doctor: <b>{{$doctor->persona->nombre}} {{$doctor->persona->apellido}}</b></p>
-                </div>
-
-                <div class="col-lg-6 col-md-6 col-sm-12 mb-2" style="line-height: 12px">
-                    <p style="font-size: 23px">Especialidad: <b>{{$doctor->especialista->descripcion}}</b></p>
-                </div>
-            </div>
-        </div>
-
-        <form action="{{route('doctor_consulta.store')}}" method="POST">
-            @csrf
-
-            <div class="widget-content widget-content-area mb-4">
+            <div class="widget-content widget-content-area mb-4 mt-2">
                 <div class="row">
 
                     <div class="col-lg-12 col-md-12 col-sm-12">
-                        <h5>Paciente : <b>{{number_format($agendaConsulta->paciente->persona->documento, 0, ".", ".")}} -
-                            {{$agendaConsulta->paciente->persona->nombre}} {{$agendaConsulta->paciente->persona->apellido}}</b>
+                        <h5>Paciente : <b>{{number_format($consulta->paciente->persona->documento, 0, ".", ".")}} -
+                            {{$consulta->paciente->persona->nombre}} {{$consulta->paciente->persona->apellido}}</b>
                         </h5>
-                        <input type="hidden" name="paciente_id" value="{{$agendaConsulta->paciente_id}}">
-                        <input type="hidden" name="doctor_turno_id" value="{{$agendaConsulta->doctor_turno_id}}">
-                        <input type="hidden" name="agenda_id" value="{{$agendaConsulta->id}}">
-                        <input type="hidden" name="doctor_id" value="{{$doctor->id}}">
                     </div>
 
                     <div class="col-lg-3 col-md-3 col-sm-12">
                         <label for="">Peso</label>
-                        <input type="number" name="peso" class="form-control" value="" required>
+                        <label class="form-control">{{$consulta->paciente->peso}}</label>
                     </div>
 
                     <div class="col-lg-3 col-md-3 col-sm-12">
                         <label for="">Altura</label>
-                        <input type="number" name="altura" class="form-control" required>
+                        <label class="form-control">{{$consulta->paciente->estatura}}</label>
                     </div>
 
                     <div class="col-lg-3 col-md-3 col-sm-12">
                         <label for="">Estado</label>
-                        <select name="estado_consulta_id" id="" class="form-control">
-                            @foreach ($estado_consulta as $item)
-                                <option {{($item->id == $agendaConsulta->estado_consulta_id ? 'selected':  '')}} value="{{$item->id}}">{{$item->descripcion}}</option>
-                            @endforeach
-                        </select>
+                        <label for="" class="form-control">ATENDIDO</label>
                     </div>
 
+                    <div class="col-lg-3 col-md-3 col-sm-12">
+                        <label for="">Atendido por Doctor</label>
+                        <label for="" class="form-control">{{$consulta->doctor_turno->doctor->persona->nombre}} {{$consulta->doctor_turno->doctor->persona->apellido}}</label>
+                    </div>
                 </div>
             </div>
 
-            <div id="tabsIcons" class="col-lg-12 col-12 layout-spacing">
+            {{-- <div id="tabsIcons" class="col-lg-12 col-12 layout-spacing">
                 <div class="statbox widget box box-shadow">
                     <div class="widget-content widget-content-area icon-tab">
 
@@ -150,16 +131,9 @@
 
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
-            <div class="row">
-                <button type="submit" class="btn btn-primary">Guardar</button>
-            </div>
-
-        </form>
     </div>
-
-
 
 
 @endsection
