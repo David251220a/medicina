@@ -64,7 +64,7 @@
                 @endif --}}
                 @if(session()->has('message'))
                     <div class="mb-6 mt-10" style="border: rgb(25, 66, 25) 2px solid; margin-top:25px;border-radius:25px
-                    ;padding-bottom:5px;padding-top:5px;margin-left:5px;background:rgb(25, 66, 25) 2px solid; color:white;font-size:20px">
+                    ;padding-bottom:5px;padding-top:5px;margin-left:5px;background:rgb(25, 66, 25); color:white;font-size:20px">
                         {{ session()->get('message') }}
                     </div>
             @endif

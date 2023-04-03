@@ -5,9 +5,11 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DoctorConsultaController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\EspecialidadController;
+use App\Http\Controllers\GrupoUsuarioController;
 use App\Http\Controllers\InicioController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\PersonaController;
+use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -37,6 +39,8 @@ Route::group([
     Route::resource('/pacientes', PacienteController::class)->names('paciente');
     Route::resource('/doctors', DoctorController::class)->names('doctor');
     Route::resource('/especialidads', EspecialidadController::class)->names('especialidad');
+    Route::resource('/users', UsuarioController::class)->names('user');
+    Route::resource('/roles', GrupoUsuarioController::class)->names('role');
 
     Route::get('/doctors/espacialidad/{doctor}', [DoctorController::class, 'asignar_especialidad'])->name('doctor.asignar_especialidad');
     Route::post('/doctors/espacialidad/{doctor}', [DoctorController::class, 'asignar_especialidad_store'])->name('doctor.asignar_especialidad_store');

@@ -21,4 +21,9 @@ class Consulta extends Model
     {
         return $this->belongsTo(Doctor_Turno::class, 'doctor_turno_id');
     }
+
+    public function estudios()
+    {
+        return $this->hasMany(OrdenEstudio::class, 'consulta_id');
+    }
 }

@@ -12,4 +12,9 @@ class OrdenEstudio extends Model
     protected $table = 'orden_estudio';
 
     protected $guarded = [];
+
+    public function tipo_estudio()
+    {
+        return $this->belongsTo(TipoEstudio::class, 'tipo_estudio_id');
+    }
 }

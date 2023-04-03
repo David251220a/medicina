@@ -71,6 +71,26 @@
             </a>
         </li>
 
+        <li class="menu">
+            <a href="{{ route('user.index') }}" {{(substr(Route::currentRouteName() , 0 , strpos(Route::currentRouteName(), '.')) == 'user' ? 'data-active=true' : '')}}
+                aria-expanded="false" class="dropdown-toggle">
+                <div class="">
+                    <i class="fas fa-user-tie mr-3"></i>
+                    <span>Usuario</span>
+                </div>
+            </a>
+        </li>
+
+        <li class="menu">
+            <a href="{{ route('role.index') }}" {{(substr(Route::currentRouteName() , 0 , strpos(Route::currentRouteName(), '.')) == 'role' ? 'data-active=true' : '')}}
+                aria-expanded="false" class="dropdown-toggle">
+                <div class="">
+                    <i class="fas fa-users mr-3"></i>
+                    <span>Grupo Usuario</span>
+                </div>
+            </a>
+        </li>
+
     </ul>
     <!-- <div class="shadow-bottom"></div> -->
 

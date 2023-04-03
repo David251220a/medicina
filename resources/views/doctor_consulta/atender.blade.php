@@ -39,12 +39,12 @@
 
                     <div class="col-lg-3 col-md-3 col-sm-12">
                         <label for="">Peso</label>
-                        <input type="number" name="peso" class="form-control" value="" required>
+                        <input type="number" name="peso" class="form-control" value="{{ (empty($agendaConsulta->paciente) ? '' : $agendaConsulta->paciente->peso) }}" required>
                     </div>
 
                     <div class="col-lg-3 col-md-3 col-sm-12">
                         <label for="">Altura</label>
-                        <input type="number" name="altura" class="form-control" required>
+                        <input type="number" name="altura" class="form-control" value="{{ (empty($agendaConsulta->paciente) ? '' : $agendaConsulta->paciente->estatura) }}" required>
                     </div>
 
                     <div class="col-lg-3 col-md-3 col-sm-12">
