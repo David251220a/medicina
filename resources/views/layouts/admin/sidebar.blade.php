@@ -62,6 +62,16 @@
         </li>
 
         <li class="menu">
+            <a href="{{ route('consulta.index') }}" {{(substr(Route::currentRouteName() , 0 , strpos(Route::currentRouteName(), '.')) == 'consulta' ? 'data-active=true' : '')}}
+                aria-expanded="false" class="dropdown-toggle">
+                <div class="">
+                    <i class="fas fa-question mr-3"></i>
+                    <span>Consulta General</span>
+                </div>
+            </a>
+        </li>
+
+        <li class="menu">
             <a href="{{ route('doctor_consulta.index') }}" {{(substr(Route::currentRouteName() , 0 , strpos(Route::currentRouteName(), '.')) == 'doctor_consulta' ? 'data-active=true' : '')}}
                 aria-expanded="false" class="dropdown-toggle">
                 <div class="">
@@ -90,6 +100,7 @@
                 </div>
             </a>
         </li>
+
 
     </ul>
     <!-- <div class="shadow-bottom"></div> -->

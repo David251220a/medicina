@@ -16,4 +16,8 @@ class Doctor_Turno extends Model
     public function doctor(){
         return $this->belongsTo(Doctor::class, 'doctor_id');
     }
+
+    public function especialidad(){
+        return $this->belongsTo(Especialidad::class, 'especialidad_id');
+    }
 }
