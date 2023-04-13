@@ -54,5 +54,9 @@ Route::group([
     Route::post('/doctor/consulta/paciente', [DoctorConsultaController::class, 'store'])->name('doctor_consulta.store');
     Route::get('/doctor/consulta/{consulta}/atendido', [DoctorConsultaController::class, 'atendido'])->name('doctor_consulta.atendido');
     Route::get('/consulta/general', [ConsultaController::class, 'index'])->name('consulta.index');
+    Route::get('/personas/users/actualizar', [PersonaController::class, 'edit_user'])->name('persona.edit_user');
+    Route::post('/personas/users/actualizar', [PersonaController::class, 'edit_user_store'])->name('persona.edit_user_store');
+    Route::get('/agendar', [InicioController::class, 'agendar'])->name('home.agendar');
+    Route::get('/agendar/cita/{especialidad}', [InicioController::class, 'agendar_cita'])->name('home.agendar_cita');
 });
 

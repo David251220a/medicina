@@ -78,4 +78,31 @@ class PersonaController extends Controller
 
         return redirect()->route('persona.edit', $persona)->with('message', 'Se actualizo con exito!.');
     }
+
+    public function edit_user()
+    {
+        $persona = auth()->user()->persona;
+        $estado_civil = Estado_Civil::all();
+        return view('edit_profile', compact('persona', 'estado_civil'));
+    }
+
+    public function edit_user_store(Request $request)
+    {
+        $request->validate([
+            'nombre' => 'required',
+            'apellido'=>'required',
+            'fecha_nacimiento'=>'required',
+            'direccion'=>'required',
+            'barrio'=>'required',
+        ]);
+
+        $persona = auth()->user()->persona;
+
+        $data = $request->all();
+        $data['usuario_modificacion'] = auth()->user()->id;
+
+        $persona->update($data);
+
+        return redirect()->route('home')->with('message', 'Se actualizo con exito!.');
+    }
 }

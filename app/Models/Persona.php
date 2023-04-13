@@ -20,4 +20,8 @@ class Persona extends Model
     public function doctor(){
         return $this->hasOne(Doctor::class, 'persona_id');
     }
+
+    public function ciudad(){
+        return $this->belongsTo(Ciudad::class, 'ciudad_id');
+    }
 }

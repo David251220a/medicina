@@ -34,7 +34,7 @@
                     <div class="col-lg-3 col-md-4 col-sm-12 mb-4">
                         <label for="">Repetir Contraseña</label>
                         <input type="password" class="form-control" name="password_rep" id="password_rep" value="{{old('password')}}"
-                        onkeyup="verificar_pass()" required>
+                        onkeyup="verificar_pass()" >
                         <span id="msj" style="display: none"><p style="color: red">Las contraseñas no coinciden!!</p></span>
                     </div>
                     <div class="col-lg-3 col-md-4 col-sm-12 mb-4">

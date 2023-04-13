@@ -13,6 +13,7 @@ use App\Models\TipoEstudio;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Stmt\Return_;
 
 class DoctorConsultaController extends Controller
 {
@@ -23,7 +24,9 @@ class DoctorConsultaController extends Controller
 
         $doctor = Persona::where('documento', $user->documento)->first();
         $doctor = $doctor->doctor;
-
+        if(empty($doctor)){
+            return redirect()->route('home');
+        }
         $data = AgendaConsulta::join('doctor_turno as a', 'agenda_consulta.doctor_turno_id', '=', 'a.id')
         ->select('agenda_consulta.*', 'a.doctor_id')
         ->where(DB::raw('CAST(agenda_consulta.fecha_consulta AS DATE)'), $fecha_actual->format('Y-m-d'))

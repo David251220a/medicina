@@ -7,7 +7,7 @@
     <link href="{{asset('assets/css/elements/search.css')}}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="{{asset('plugins/table/datatable/datatables.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('plugins/table/datatable/dt-global_style.css')}}">
-    <link href="assets/css/elements/popover.css" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/css/elements/popover.css')}}" rel="stylesheet" type="text/css" />
 @endsection
 
 @section('content')
@@ -104,8 +104,8 @@
 @section('js')
     <script src="{{asset('plugins/sweetalerts/sweetalert2.min.js')}}"></script>
     <script src="{{asset('plugins/sweetalerts/custom-sweetalert.js')}}"></script>
-    <script src="{{asset('assets/js/elements/popovers.js"')}}></script>
-    <script src="{{asset('}plugins/table/datatable/datatables.js')}}"></script>
+    <script src="{{asset('assets/js/elements/popovers.js')}}"></script>
+    <script src="{{asset('plugins/table/datatable/datatables.js')}}"></script>
     <script>
         $('#zero-config').DataTable({
             "dom": "<'dt--top-section'<'row'<'col-12 col-sm-6 d-flex justify-content-sm-start justify-content-center'l><'col-12 col-sm-6 d-flex justify-content-sm-end justify-content-center mt-sm-0 mt-3'f>>>" +
