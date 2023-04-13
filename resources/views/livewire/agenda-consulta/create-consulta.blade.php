@@ -35,9 +35,9 @@
             @endif
         </div>
 
-        <div class="col-md-3 col-sm-6 mb-2">
+        <div class="col-md-4 col-sm-6 mb-2">
             <label for="">Doctor</label>
-            <select class="form-control" name="doctor_turno_id" required>
+            <select wire:model="turno_id" class="form-control" name="doctor_turno_id" required>
                 @php
                     $hay_doctores = 0;
                 @endphp
@@ -59,8 +59,11 @@
 
             </select>
         </div>
-
-        <div class="col-md-3 col-sm-6 mb-2">
+        <div class="col-md-4 col-sm-6 mb-2">
+            <label for="">Detalles Doctor</label>
+            <p>{{$detalles_doctor}}</p>
+        </div>
+        <div class="col-md-4 col-sm-6 mb-2">
             <button type="button" class="btn btn-info" onclick="doctor_disponible()">Doctor Disponible</button>
         </div>
     </div>

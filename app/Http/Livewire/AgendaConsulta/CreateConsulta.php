@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\AgendaConsulta;
 
+use App\Models\Doctor;
 use App\Models\Doctor_Turno;
 use App\Models\Especialidad;
 use App\Models\Paciente;
@@ -13,7 +14,7 @@ use Livewire\Component;
 class CreateConsulta extends Component
 {
     public $especialidad_id, $fecha, $doctor, $paciente_id, $paciente_nombre, $documento_paciente, $limite_atencion
-    , $error_persona, $dia, $error_fecha, $doctor_id;
+    , $error_persona, $dia, $error_fecha, $doctor_id, $turno_id, $detalles_doctor;
 
     public $documento, $nombre, $apellido, $fecha_nacimiento, $direccion, $barrio, $sexo, $celular;
     protected $listeners = ['buscar_persona', 'doctor_disponible', 'resetUI', 'save'];
@@ -39,6 +40,12 @@ class CreateConsulta extends Component
 
     public function render()
     {
+
+        if((!empty($this->turno_id))){
+            $ver = Doctor_Turno::find($this->turno_id);
+            $this->detalles_doctor  = 'Desde ' . date('h:i', strtotime($ver->hora_desde)) . ' a ' . date('h:i', strtotime($ver->hora_hasta)) .' con un limite de personas de: ' . $this->limite_atencion;
+
+        }
         return view('livewire.agenda-consulta.create-consulta');
     }
 
@@ -84,6 +91,17 @@ class CreateConsulta extends Component
             ->where('dia', $this->dia)
             ->where('especialidad_id', $this->especialidad_id)
             ->get();
+
+            foreach($this->doctor AS $item){
+                if ($item->cont < $this->limite_atencion){
+                    $this->turno_id = $item->id;
+                    break;
+                }
+            }
+
+            $ver = Doctor_Turno::find($this->turno_id);
+            $this->detalles_doctor  = 'Desde ' . date('h:i', strtotime($ver->hora_desde)) . ' a ' . date('h:i', strtotime($ver->hora_hasta)) .' con un limite de personas de: ' . $this->limite_atencion;
+
             $this->error_fecha = '';
             $this->emit('reloadClassCSs');
         }

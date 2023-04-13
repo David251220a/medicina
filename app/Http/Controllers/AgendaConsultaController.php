@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AgendaConsulta;
 use App\Models\Especialidad;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AgendaConsultaController extends Controller
 {
@@ -38,11 +39,22 @@ class AgendaConsultaController extends Controller
         // $turno_doctor = Doctor_Turno::find($request->doctor_turno_id);
         $limite_atencion_agendado = AgendaConsulta::where('estado_id', 1)
         ->where('doctor_turno_id', $request->doctor_turno_id)
-        ->where('fecha_consulta', $request->fecha_consulta)
+        ->where(DB::raw('CAST(fecha_consulta AS DATE)'), $request->fecha_consulta)
         ->count();
 
         if($limite_atencion_agendado >= $especialidad->limite_atencion){
             return redirect()->back()->withInput()->withErrors('Lo sentimos ya se ha alcanzado el limite de atencion para este dia!.');
+        }
+
+        $existe_agendado = AgendaConsulta::where('paciente_id', $request->paciente_id)
+        ->where('doctor_turno_id', $request->doctor_turno_id)
+        ->where('estado_id', 1)
+        ->where('fecha_consulta', $request->fecha_consulta)
+        ->first();
+
+        if($existe_agendado){
+            return redirect()->back()->withInput()->withErrors('Esta persona ya esta agendado con este doctor en la misma fecha: '
+            .date('d/m/Y', strtotime($request->fecha_consulta)) .'!.');
         }
 
         $orden = AgendaConsulta::where('estado_id', 1)

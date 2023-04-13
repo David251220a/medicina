@@ -4,7 +4,7 @@
     <link href="{{asset('assets/css/elements/search.css')}}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="{{asset('plugins/table/datatable/datatables.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('plugins/table/datatable/dt-global_style.css')}}">
-    <link href="assets/css/elements/popover.css" rel="stylesheet" type="text/css" />
+    {{-- <link href="assets/css/elements/popover.css" rel="stylesheet" type="text/css" /> --}}
 @endsection
 
 @section('content')
@@ -46,16 +46,16 @@
                     <div class="col-xl-4 col-lg-4 col-sm-4 ml-3 mt-2 mb-2">
                         <label for="">Doctor</label>
                         <select name="doctor" id="doctor" class="form-control">
-                            <option>-- TODOS --</option>
+                            <option {{ ($doctor == 'n' ? 'selected' : '') }} value="n">-- TODOS --</option>
                             @foreach ($doctores as $item)
-                                <option value="{{$item->id}}">{{$item->persona->nombre}} {{$item->persona->apellido}}</option>
+                                <option {{ ($doctor == $item->id ? 'selected' : '') }} value="{{$item->id}}">{{$item->persona->nombre}} {{$item->persona->apellido}}</option>
                             @endforeach
                         </select>
                     </div>
 
                     <div class="col-xl-4 col-lg-4 col-sm-4 ml-3 mt-2 mb-2">
                         <label for="">Fecha</label>
-                        <input type="date" class="form-control" name="fecha">
+                        <input type="date" class="form-control" name="fecha" value="{{$fecha}}">
                     </div>
 
                     <div class="col-xl-3 col-lg-3 col-sm-4 ml-3 mt-2 mb-2">
@@ -84,11 +84,12 @@
                         <tbody>
                             @foreach ($data as $item)
                                 <tr>
-                                    <td>{{$item->paciente->documento}}</td>
-                                    <td>{{$item->paciente->nombre}} {{$item->paciente->apellido}}</td>
+                                    <td style="text-align: right">{{number_format($item->paciente->persona->documento, 0, ".", ".")}}</td>
+                                    <td>{{$item->paciente->persona->nombre}} {{$item->paciente->persona->apellido}}</td>
                                     <td>{{$item->orden}}</td>
-                                    <td>{{$item->doctor_turno->doctor->nombre}}</td>
+                                    <td>{{$item->doctor_turno->doctor->persona->nombre}}</td>
                                     <td>{{$item->doctor_turno->especialidad->descripcion}}</td>
+                                    <td>{{$item->estado_consulta->descripcion}}</td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -104,7 +105,7 @@
 
 @section('js')
     <script src="{{asset('assets/js/elements/popovers.js')}}"></script>
-    <script src="{{asset('}plugins/table/datatable/datatables.js')}}"></script>
+    <script src="{{asset('plugins/table/datatable/datatables.js')}}"></script>
     <script>
         $('#zero-config').DataTable({
             "dom": "<'dt--top-section'<'row'<'col-12 col-sm-6 d-flex justify-content-sm-start justify-content-center'l><'col-12 col-sm-6 d-flex justify-content-sm-end justify-content-center mt-sm-0 mt-3'f>>>" +
