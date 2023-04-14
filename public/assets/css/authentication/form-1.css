@@ -162,7 +162,7 @@ body {
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
-    
+
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -174,7 +174,7 @@ body {
     width: 50%;
 }
 .form-image .l-image {
-    background-image: url(../../../../../../../cdn.pixabay.com/photo/2015/12/10/16/39/shield-1086703_960_720.png);
+    background-image: url(/storage/icono/Logo-Medico.jpg);
     position: absolute;
     top: 0;
     left: 0;

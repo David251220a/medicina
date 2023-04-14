@@ -20,10 +20,10 @@
 
         <div class="col-lg-12 layout-spacing">
             <div class="widget-content widget-content-area">
-                <form class="needs-validation" novalidate action="{{route('agenda_consulta.especialidad_store', $especialidad)}}" method="POST"
+                <form class="needs-validation" novalidate action="{{route('home.agendar_cita_store', $especialidad)}}" method="POST"
                 enctype="multipart/form-data">
                 @csrf
-                    @livewire('agenda-consulta.create-consulta', ['especialidad' => $especialidad], key($especialidad->id))
+                    @livewire('home.agendar-cita', ['especialidad' => $especialidad], key($especialidad->id))
 
                     <button class="btn btn-primary mt-3" type="submit">Grabar</button>
 

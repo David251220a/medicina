@@ -35,16 +35,22 @@ class DoctorConsultaController extends Controller
         ->orderBy('agenda_consulta.orden', 'ASC')
         ->paginate(30);
 
-        return view('doctor_consulta.index', compact('data', 'doctor'));
+        $estado_consulta = EstadoConsulta::where('estado_id', 1)->get();
+
+        return view('doctor_consulta.index', compact('data', 'doctor', 'estado_consulta'));
     }
 
     public function atender(AgendaConsulta $agendaConsulta)
     {
+        if($agendaConsulta->consulta){
+            return redirect()->route('doctor_consulta.index')->withInput()->withErrors('Este paciente ya sido atendido');
+        }
         $user = auth()->user();
         $doctor = Persona::where('documento', $user->documento)->first();
         $doctor = $doctor->doctor;
         $estado_consulta = EstadoConsulta::all();
         $tipo_estudio = TipoEstudio::where('estado_id', 1)->get();
+
 
         return view('doctor_consulta.atender', compact('agendaConsulta', 'doctor', 'estado_consulta', 'tipo_estudio'));
     }
@@ -99,7 +105,7 @@ class DoctorConsultaController extends Controller
 
         $agendaConsulta = AgendaConsulta::find($request->agenda_id);
         $agendaConsulta->update([
-            'estado_consulta_id' => $request->estado_consulta_id,
+            'estado_consulta_id' => 2,
             'usuario_modificacion' => auth()->user()->id,
         ]);
 
@@ -109,5 +115,27 @@ class DoctorConsultaController extends Controller
 
     public function atendido(Consulta $consulta){
         return view('doctor_consulta.atendido', compact('consulta'));
+    }
+
+    public function editar_estado(Request $request)
+    {
+        $agenda_id = $request->agenda_id;
+        $estado_consulta_id = $request->estado_consulta_id;
+        $agenda = AgendaConsulta::find($agenda_id);
+        if($agenda->estado_consulta_id == 2){
+            $data['mensaje'] = 'No se puede actualizar un registro con estado FINALIZADO!.';
+            $data['ok'] = 0;
+            return response()->json($data);
+        }
+
+        $agenda->update([
+            'estado_consulta_id' => $estado_consulta_id,
+        ]);
+
+        $estado_consulta = EstadoConsulta::find($estado_consulta_id);
+        $data['mensaje'] = 'Actualizado con exito!.';
+        $data['descripcion'] = $estado_consulta->descripcion;
+        $data['ok'] = 1;
+        return response()->json($data);
     }
 }

@@ -49,7 +49,7 @@ class AgendaConsultaController extends Controller
         $existe_agendado = AgendaConsulta::where('paciente_id', $request->paciente_id)
         ->where('doctor_turno_id', $request->doctor_turno_id)
         ->where('estado_id', 1)
-        ->where('fecha_consulta', $request->fecha_consulta)
+        ->where(DB::raw('CAST(fecha_consulta AS DATE)'), $request->fecha_consulta)
         ->first();
 
         if($existe_agendado){
@@ -59,7 +59,7 @@ class AgendaConsultaController extends Controller
 
         $orden = AgendaConsulta::where('estado_id', 1)
         ->where('doctor_turno_id', $request->doctor_turno_id)
-        ->where('fecha_consulta', $request->fecha_consulta)
+        ->where(DB::raw('CAST(fecha_consulta AS DATE)'), $request->fecha_consulta)
         ->max('orden');
 
         $orden = $orden + 1;

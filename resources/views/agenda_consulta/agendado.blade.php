@@ -12,7 +12,7 @@
                 <h3 class="card-title">Agendado con Exito!</h3>
                 <p class="card-text">
                     Paciente: <b>{{number_format($agendaConsulta->paciente->persona->documento, 0, '.', '.')}} -
-                    {{$agendaConsulta->paciente->persona->nombre}} {{$agendaConsulta->paciente->persona->Ortiz}}</b>
+                    {{$agendaConsulta->paciente->persona->nombre}} {{$agendaConsulta->paciente->persona->apellido}}</b>
                     <br>
                     Especialista: <b>{{$agendaConsulta->doctor_turno->doctor->especialista->descripcion}}</b>
                     <br>

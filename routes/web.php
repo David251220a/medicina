@@ -11,6 +11,7 @@ use App\Http\Controllers\InicioController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\WwwController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -25,9 +26,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [WwwController::class, 'index'])->name('w_inicio');
 
 Auth::routes();
 Route::get('/logout', [LoginController::class, 'logout']);
@@ -45,18 +44,27 @@ Route::group([
 
     Route::get('/doctors/espacialidad/{doctor}', [DoctorController::class, 'asignar_especialidad'])->name('doctor.asignar_especialidad');
     Route::post('/doctors/espacialidad/{doctor}', [DoctorController::class, 'asignar_especialidad_store'])->name('doctor.asignar_especialidad_store');
+
     Route::get('/agenda/consulta', [AgendaConsultaController::class, 'index'])->name('agenda_consulta.index');
     Route::get('/agenda/consulta/{especialidad}/especialidad', [AgendaConsultaController::class, 'especialidad'])->name('agenda_consulta.especialidad');
     Route::post('/agenda/consulta/{especialidad}/especialidad', [AgendaConsultaController::class, 'especialidad_store'])->name('agenda_consulta.especialidad_store');
     Route::get('/agendado/{agendaConsulta}', [AgendaConsultaController::class, 'agendado'])->name('agenda_consulta.agendado');
+
     Route::get('/doctor/consulta', [DoctorConsultaController::class, 'index'])->name('doctor_consulta.index');
     Route::get('/doctor/consulta/{agenda_consulta}/paciente', [DoctorConsultaController::class, 'atender'])->name('doctor_consulta.atender');
+    Route::post('/doctor/consulta/edit/estado', [DoctorConsultaController::class, 'editar_estado'])->name('doctor_consulta.editar_estado');
     Route::post('/doctor/consulta/paciente', [DoctorConsultaController::class, 'store'])->name('doctor_consulta.store');
     Route::get('/doctor/consulta/{consulta}/atendido', [DoctorConsultaController::class, 'atendido'])->name('doctor_consulta.atendido');
+
     Route::get('/consulta/general', [ConsultaController::class, 'index'])->name('consulta.index');
+
     Route::get('/personas/users/actualizar', [PersonaController::class, 'edit_user'])->name('persona.edit_user');
     Route::post('/personas/users/actualizar', [PersonaController::class, 'edit_user_store'])->name('persona.edit_user_store');
+
     Route::get('/agendar', [InicioController::class, 'agendar'])->name('home.agendar');
     Route::get('/agendar/cita/{especialidad}', [InicioController::class, 'agendar_cita'])->name('home.agendar_cita');
+    Route::post('/agendar/cita/{especialidad}', [InicioController::class, 'agendar_cita_store'])->name('home.agendar_cita_store');
+    Route::get('/cita/agenda/{agendaConsulta}', [InicioController::class, 'cita_agendada'])->name('home.cita_agendada');
+    Route::get('/home/consulta/{consulta}/atendido', [InicioController::class, 'atendido'])->name('home.atendido');
 });
 

@@ -89,10 +89,10 @@
                                 @if ($consultas)
                                     @foreach ($consultas as $item)
                                         <tr>
-                                            <td>{{$item->fecha_consulta}}</td>
+                                            <td>{{date('d/m/Y', strtotime($item->fecha))}}</td>
                                             <td>{{$item->doctor_turno->doctor->persona->nombre}} {{$item->doctor_turno->doctor->persona->apellido}}</td>
                                             <td>
-                                                <a href="#" class="btn btn-info">Ver</a>
+                                                <a href="{{route('home.atendido', $item)}}" class="btn btn-info">Ver</a>
                                             </td>
                                         </tr>
                                     @endforeach

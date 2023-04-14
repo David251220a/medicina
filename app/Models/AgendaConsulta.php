@@ -28,4 +28,8 @@ class AgendaConsulta extends Model
         return $this->belongsTo(EstadoConsulta::class, 'estado_consulta_id');
     }
 
+    public function consulta()
+    {
+        return $this->hasOne(Consulta::class, 'agenda_id');
+    }
 }

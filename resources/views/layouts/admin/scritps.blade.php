@@ -3,6 +3,7 @@
 <script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('plugins/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
 <script src="{{asset('assets/js/app.js')}}"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
 
 <script>
     $(document).ready(function() {
@@ -10,10 +11,5 @@
     });
 </script>
 <script src="{{asset('assets/js/custom.js')}}"></script>
-<!-- END GLOBAL MANDATORY SCRIPTS -->
 
-<!-- BEGIN PAGE LEVEL SCRIPTS -->
-<script src="{{asset('plugins/table/datatable/datatables.js')}}"></script>
-<script src="{{asset('plugins/highlight/highlight.pack.js')}}"></script>
-<script src="{{asset('assets/js/scrollspyNav.js')}}"></script>
 <script src="{{asset('js/global.js')}}"></script>

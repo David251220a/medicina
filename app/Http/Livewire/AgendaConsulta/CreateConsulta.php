@@ -17,7 +17,7 @@ class CreateConsulta extends Component
     , $error_persona, $dia, $error_fecha, $doctor_id, $turno_id, $detalles_doctor;
 
     public $documento, $nombre, $apellido, $fecha_nacimiento, $direccion, $barrio, $sexo, $celular;
-    protected $listeners = ['buscar_persona', 'doctor_disponible', 'resetUI', 'save'];
+    protected $listeners = ['buscar_persona', 'doctor_disponible', 'resetUI', 'save', 'cargar_combo'];
 
     protected $rules = [
         'documento' => 'required|unique:persona,documento',
@@ -43,8 +43,8 @@ class CreateConsulta extends Component
 
         if((!empty($this->turno_id))){
             $ver = Doctor_Turno::find($this->turno_id);
-            $this->detalles_doctor  = 'Desde ' . date('h:i', strtotime($ver->hora_desde)) . ' a ' . date('h:i', strtotime($ver->hora_hasta)) .' con un limite de personas de: ' . $this->limite_atencion;
-
+            $this->detalles_doctor  = 'Desde ' . date('H:i', strtotime($ver->hora_desde)) . ' a ' . date('H:i', strtotime($ver->hora_hasta)) .' con un limite de personas de: ' . $this->limite_atencion;
+            $this->cargar_combo();
         }
         return view('livewire.agenda-consulta.create-consulta');
     }
@@ -78,20 +78,7 @@ class CreateConsulta extends Component
         if($this->fecha < $fecha_actual){
             $this->error_fecha = 'Debe elegir una mayor o igual a la fecha actual!';
         }else{
-            $this->saber_dia();
-            $this->doctor = Doctor_Turno::select('doctor_turno.*'
-            , DB::raw('(
-                SELECT
-                    COUNT(z.paciente_id)
-                FROM agenda_consulta AS z
-                WHERE CAST(z.fecha_consulta AS DATE) = CAST("'.$this->fecha.'" AS DATE)
-                AND z.doctor_turno_id = doctor_turno.id
-                AND z.estado_id = 1) AS cont'))
-            ->where('estado_id', 1)
-            ->where('dia', $this->dia)
-            ->where('especialidad_id', $this->especialidad_id)
-            ->get();
-
+            $this->cargar_combo();
             foreach($this->doctor AS $item){
                 if ($item->cont < $this->limite_atencion){
                     $this->turno_id = $item->id;
@@ -100,7 +87,7 @@ class CreateConsulta extends Component
             }
 
             $ver = Doctor_Turno::find($this->turno_id);
-            $this->detalles_doctor  = 'Desde ' . date('h:i', strtotime($ver->hora_desde)) . ' a ' . date('h:i', strtotime($ver->hora_hasta)) .' con un limite de personas de: ' . $this->limite_atencion;
+            $this->detalles_doctor  = 'Desde ' . date('H:i', strtotime($ver->hora_desde)) . ' a ' . date('H:i', strtotime($ver->hora_hasta)) .' con un limite de personas de: ' . $this->limite_atencion;
 
             $this->error_fecha = '';
             $this->emit('reloadClassCSs');
@@ -187,6 +174,23 @@ class CreateConsulta extends Component
         $this->reset('barrio');
         $this->reset('celular');
         $this->emit('reloadClassCSs');
+    }
+
+    public function cargar_combo()
+    {
+        $this->saber_dia();
+        $this->doctor = Doctor_Turno::select('doctor_turno.*'
+        , DB::raw('(
+            SELECT
+                COUNT(z.paciente_id)
+            FROM agenda_consulta AS z
+            WHERE CAST(z.fecha_consulta AS DATE) = CAST("'.$this->fecha.'" AS DATE)
+            AND z.doctor_turno_id = doctor_turno.id
+            AND z.estado_id = 1) AS cont'))
+        ->where('estado_id', 1)
+        ->where('dia', $this->dia)
+        ->where('especialidad_id', $this->especialidad_id)
+        ->get();
     }
 
 }

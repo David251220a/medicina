@@ -7,7 +7,7 @@
     <link href="{{asset('assets/css/elements/search.css')}}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="{{asset('plugins/table/datatable/datatables.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('plugins/table/datatable/dt-global_style.css')}}">
-    <link href="assets/css/elements/popover.css" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/css/elements/popover.css')}}" rel="stylesheet" type="text/css" />
 @endsection
 
 @section('content')
@@ -81,12 +81,22 @@
                                         </td>
                                         <td>{{$item->paciente->persona->celular}}</td>
                                         <td style="text-align: right">{{$item->orden}}</td>
-                                        <td>{{$item->estado_consulta->descripcion}}</td>
+                                        <td id="{{$item->id}}">{{$item->estado_consulta->descripcion}}</td>
                                         <td>
                                             <a href="{{route('doctor_consulta.atender', $item)}}"
-                                            class="bs-popover" data-container="body" data-container="body" data-trigger="hover" data-placement="top" data-content="Atender">
+                                            class="bs-popover mr-2" data-container="body" data-container="body" data-trigger="hover" data-placement="top" data-content="Atender">
                                                 <i class="fas fa-clipboard-user"></i>
                                             </a>
+                                            <a onclick="abrir_modal({{$item->id}})"
+                                            class="bs-popover mr-2" data-container="body" data-container="body" data-trigger="hover" data-placement="top" data-content="Cambiar Estado">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            @if ($item->consulta)
+                                                <a href="{{route('doctor_consulta.atendido', $item->consulta)}}"
+                                                class="bs-popover mr-2" data-container="body" data-container="body" data-trigger="hover" data-placement="top" data-content="Ver Detalle">
+                                                <i class="fas fa-id-card-alt"></i>
+                                                </a>
+                                            @endif
                                         </td>
                                     </tr>
 
@@ -103,11 +113,11 @@
 
     </div>
 
+    @include('ui.modal.editar_estado')
 @endsection
 
 @section('js')
     <script src="{{asset('plugins/sweetalerts/sweetalert2.min.js')}}"></script>
     <script src="{{asset('plugins/sweetalerts/custom-sweetalert.js')}}"></script>
-    <script src="{{asset('assets/js/elements/popovers.js"')}}"></script>
-
+    <script src="{{asset('assets/js/elements/popovers.js')}}"></script>
 @endsection
