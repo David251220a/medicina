@@ -9,6 +9,14 @@ use Illuminate\Support\Facades\DB;
 
 class AgendaConsultaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:agenda_consulta.index')->only('index');
+        $this->middleware('permission:agenda_consulta.especialidad')->only('especialidad');
+        $this->middleware('permission:agenda_consulta.especialidad_store')->only('especialidad_store');
+        $this->middleware('permission:agenda_consulta.agendado')->only('agendado');
+    }
+
     public function index(Request $request)
     {
         $search = "";

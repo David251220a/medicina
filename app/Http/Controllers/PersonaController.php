@@ -8,6 +8,17 @@ use Illuminate\Http\Request;
 
 class PersonaController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:persona.index')->only('index');
+        $this->middleware('permission:persona.create')->only('create');
+        $this->middleware('permission:persona.store')->only('store');
+        $this->middleware('permission:persona.show')->only('show');
+        $this->middleware('permission:persona.edit')->only('edit');
+        $this->middleware('permission:persona.update')->only('update');
+    }
+
     public function index(Request $request)
     {
         $search = str_replace('.', '', $request->search);

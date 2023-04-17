@@ -9,6 +9,16 @@ use Spatie\Permission\Models\Role;
 
 class UsuarioController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:user.index')->only('index');
+        $this->middleware('permission:user.create')->only('create');
+        $this->middleware('permission:user.store')->only('store');
+        $this->middleware('permission:user.edit')->only('edit');
+        $this->middleware('permission:user.update')->only('update');
+    }
+
     public function index(Request $request)
     {
         $search = str_replace(',', '', $request->search);

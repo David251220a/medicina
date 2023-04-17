@@ -11,9 +11,11 @@
 
     <div class="layout-px-spacing">
         <div class="row" style="margin-top: 15px">
-            <div class="col-xl-4 col-lg-4 col-sm-4">
-                <a class="btn btn-primary btn-rounded mb-2" href="{{route('role.create')}}">Agregar</a>
-            </div>
+            @can('role.create')
+                <div class="col-xl-4 col-lg-4 col-sm-4">
+                    <a class="btn btn-primary btn-rounded mb-2" href="{{route('role.create')}}">Agregar</a>
+                </div>
+            @endcan
         </div>
 
         <div class="row layout-top-spacing" id="cancel-row">
@@ -34,10 +36,13 @@
                                     <td style="text-align: right">{{number_format($item->id, 0, ".", ".")}}</td>
                                     <td>{{$item->name}}</td>
                                     <td>
-                                        <a href="{{route('role.edit', $item)}}" class="bs-popover" data-container="body"
-                                        data-container="body" data-trigger="hover" data-placement="top" data-content="Editar Rol">
-                                        <i class="fas fa-edit"></i>
-                                        </a>
+                                        @can('role.edit')
+                                            <a href="{{route('role.edit', $item)}}" class="bs-popover" data-container="body"
+                                            data-container="body" data-trigger="hover" data-placement="top" data-content="Editar Rol">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                        @endcan
+
                                     </td>
                                 </tr>
                             @endforeach

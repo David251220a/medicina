@@ -27,6 +27,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [WwwController::class, 'index'])->name('w_inicio');
+Route::get('/nosotros', [WwwController::class, 'sobre_nosotros'])->name('w_sobre_nosotros');
+Route::get('/servicios', [WwwController::class, 'servicios'])->name('w_servicios');
+Route::get('/contacto', [WwwController::class, 'contacto'])->name('w_contacto');
 
 Auth::routes();
 Route::get('/logout', [LoginController::class, 'logout']);

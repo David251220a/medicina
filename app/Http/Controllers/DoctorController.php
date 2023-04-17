@@ -11,6 +11,16 @@ use Illuminate\Http\Request;
 
 class DoctorController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:doctor.index')->only('index');
+        $this->middleware('permission:doctor.create')->only('create');
+        $this->middleware('permission:doctor.store')->only('store');
+        $this->middleware('permission:doctor.asignar_especialidad')->only('asignar_especialidad');
+        $this->middleware('permission:doctor.asignar_especialidad_store')->only('asignar_especialidad_store');
+    }
+
     public function index(Request $request)
     {
         $search= str_replace('.', '', $request->search);

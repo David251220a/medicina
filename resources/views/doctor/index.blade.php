@@ -18,9 +18,12 @@
                 @include('ui.busqueda')
             </div>
 
-            <div class="col-xl-4 col-lg-4 col-sm-4">
-                <a class="btn btn-primary btn-rounded mb-2" href="{{route('doctor.create')}}">Agregar</a>
-            </div>
+            @can('doctor.create')
+                <div class="col-xl-4 col-lg-4 col-sm-4">
+                    <a class="btn btn-primary btn-rounded mb-2" href="{{route('doctor.create')}}">Agregar</a>
+                </div>
+            @endcan
+
         </div>
 
         <div class="row layout-top-spacing" id="cancel-row">
@@ -70,15 +73,20 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{route('persona.edit', $item)}}"
-                                        class="bs-popover" data-container="body" data-container="body" data-trigger="hover" data-placement="top" data-content="Editar Persona">
-                                            <i class="fas fa-user-edit mr-3"></i>
-                                        </a>
+                                        @can('persona.edit')
+                                            <a href="{{route('persona.edit', $item)}}"
+                                            class="bs-popover" data-container="body" data-container="body" data-trigger="hover" data-placement="top" data-content="Editar Persona">
+                                                <i class="fas fa-user-edit mr-3"></i>
+                                            </a>
+                                        @endcan
 
-                                        <a href="{{route('doctor.asignar_especialidad', $item->doctor_id)}}"
-                                        class="bs-popover" data-container="body" data-container="body" data-trigger="hover" data-placement="top" data-content="Asignar Especialidad">
-                                        <i class="fas fa-stethoscope"></i>
-                                        </a>
+                                        @can('doctor.asignar_especialidad')
+                                            <a href="{{route('doctor.asignar_especialidad', $item->doctor_id)}}"
+                                            class="bs-popover" data-container="body" data-container="body" data-trigger="hover" data-placement="top" data-content="Asignar Especialidad">
+                                                <i class="fas fa-stethoscope"></i>
+                                            </a>
+                                        @endcan
+
                                     </td>
                                 </tr>
                             @endforeach

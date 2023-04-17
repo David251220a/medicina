@@ -83,19 +83,28 @@
                                         <td style="text-align: right">{{$item->orden}}</td>
                                         <td id="{{$item->id}}">{{$item->estado_consulta->descripcion}}</td>
                                         <td>
-                                            <a href="{{route('doctor_consulta.atender', $item)}}"
-                                            class="bs-popover mr-2" data-container="body" data-container="body" data-trigger="hover" data-placement="top" data-content="Atender">
-                                                <i class="fas fa-clipboard-user"></i>
-                                            </a>
-                                            <a onclick="abrir_modal({{$item->id}})"
-                                            class="bs-popover mr-2" data-container="body" data-container="body" data-trigger="hover" data-placement="top" data-content="Cambiar Estado">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                            @if ($item->consulta)
-                                                <a href="{{route('doctor_consulta.atendido', $item->consulta)}}"
-                                                class="bs-popover mr-2" data-container="body" data-container="body" data-trigger="hover" data-placement="top" data-content="Ver Detalle">
-                                                <i class="fas fa-id-card-alt"></i>
+                                            @can('doctor_consulta.atender')
+                                                <a href="{{route('doctor_consulta.atender', $item)}}"
+                                                class="bs-popover mr-2" data-container="body" data-container="body" data-trigger="hover" data-placement="top" data-content="Atender">
+                                                    <i class="fas fa-clipboard-user"></i>
                                                 </a>
+                                            @endcan
+
+                                            @can('doctor_consulta.editar_estado')
+                                                <a onclick="abrir_modal({{$item->id}})"
+                                                class="bs-popover mr-2" data-container="body" data-container="body" data-trigger="hover" data-placement="top" data-content="Cambiar Estado">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                            @endcan
+
+                                            @if ($item->consulta)
+                                                @can('doctor_consulta.atendido')
+                                                    <a href="{{route('doctor_consulta.atendido', $item->consulta)}}"
+                                                    class="bs-popover mr-2" data-container="body" data-container="body" data-trigger="hover" data-placement="top" data-content="Ver Detalle">
+                                                        <i class="fas fa-id-card-alt"></i>
+                                                    </a>
+                                                @endcan
+
                                             @endif
                                         </td>
                                     </tr>

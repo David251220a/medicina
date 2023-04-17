@@ -9,6 +9,14 @@ use Illuminate\Http\Request;
 
 class PacienteController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:paciente.index')->only('index');
+        $this->middleware('permission:paciente.create')->only('create');
+        $this->middleware('permission:paciente.store')->only('store');
+    }
+
     public function index(Request $request)
     {
         $search= str_replace('.', '', $request->search);

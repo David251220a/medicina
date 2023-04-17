@@ -17,6 +17,16 @@ use PhpParser\Node\Stmt\Return_;
 
 class DoctorConsultaController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:doctor_consulta.index')->only('index');
+        $this->middleware('permission:doctor_consulta.atender')->only('atender');
+        $this->middleware('permission:doctor_consulta.store')->only('store');
+        $this->middleware('permission:doctor_consulta.atendido')->only('atendido');
+        $this->middleware('permission:doctor_consulta.editar_estado')->only('editar_estado');
+    }
+
     public function index(Request $request)
     {
         $user = auth()->user();

@@ -7,6 +7,16 @@ use Illuminate\Http\Request;
 
 class EspecialidadController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:especialidad.index')->only('index');
+        $this->middleware('permission:especialidad.create')->only('create');
+        $this->middleware('permission:especialidad.store')->only('store');
+        $this->middleware('permission:especialidad.edit')->only('edit');
+        $this->middleware('permission:especialidad.update')->only('update');
+    }
+
     public function index(Request $request)
     {
         $search = "";

@@ -18,9 +18,12 @@
                 @include('ui.busqueda')
             </div>
 
-            <div class="col-xl-4 col-lg-4 col-sm-4">
-                <a class="btn btn-primary btn-rounded mb-2" href="{{route('paciente.create')}}">Agregar</a>
-            </div>
+            @can('paciente.create')
+                <div class="col-xl-4 col-lg-4 col-sm-4">
+                    <a class="btn btn-primary btn-rounded mb-2" href="{{route('paciente.create')}}">Agregar</a>
+                </div>
+            @endcan
+
         </div>
 
         <div class="row layout-top-spacing" id="cancel-row">
@@ -81,15 +84,20 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{route('persona.edit', $item)}}"
-                                        class="bs-popover" data-container="body" data-container="body" data-trigger="hover" data-placement="top" data-content="Editar Persona">
-                                            <i class="fas fa-user-edit mr-2"></i>
-                                        </a>
+                                        @can('persona.edit')
+                                            <a href="{{route('persona.edit', $item)}}"
+                                            class="bs-popover" data-container="body" data-container="body" data-trigger="hover" data-placement="top" data-content="Editar Persona">
+                                                <i class="fas fa-user-edit mr-2"></i>
+                                            </a>
+                                        @endcan
 
-                                        <a href="{{route('persona.edit', $item->id)}}"
-                                        class="bs-popover" data-container="body" data-container="body" data-trigger="hover" data-placement="top" data-content="Agendar Paciente">
-                                        <i class="fas fa-calendar-alt"></i>
-                                        </a>
+                                        {{-- @can('update', $post)
+                                            <a href="{{route('persona.edit', $item->id)}}"
+                                            class="bs-popover" data-container="body" data-container="body" data-trigger="hover" data-placement="top" data-content="Agendar Paciente">
+                                                <i class="fas fa-calendar-alt"></i>
+                                            </a>
+                                        @endcan --}}
+
                                     </td>
 
                                 </tr>

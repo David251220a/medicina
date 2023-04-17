@@ -8,6 +8,16 @@ use Spatie\Permission\Models\Role;
 
 class GrupoUsuarioController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:role.index')->only('index');
+        $this->middleware('permission:role.create')->only('create');
+        $this->middleware('permission:role.store')->only('store');
+        $this->middleware('permission:role.edit')->only('edit');
+        $this->middleware('permission:role.update')->only('update');
+    }
+
     public function index()
     {
         $data = Role::get();

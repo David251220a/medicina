@@ -12,6 +12,12 @@ use Illuminate\Support\Facades\DB;
 
 class ConsultaController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:consulta.index')->only('index');
+    }
+
     public function index(Request $request)
     {
         $doctor = (empty($request->doctor) ? 'n' : $request->doctor);

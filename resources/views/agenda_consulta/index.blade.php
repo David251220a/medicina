@@ -43,7 +43,9 @@
                             <img src="{{Storage::url($item->foto)}}" class="card-img-top" alt="widget-card-2">
                             <div class="card-body">
                                 <h5 class="card-title" style="text-align: center">{{$item->descripcion}}</h5>
-                                <a href="{{route('agenda_consulta.especialidad', $item)}}" class="btn btn-primary form-control" style="margin: 10px 0 0 0;">Agendar</a>
+                                @can('agenda_consulta.especialidad')
+                                    <a href="{{route('agenda_consulta.especialidad', $item)}}" class="btn btn-primary form-control" style="margin: 10px 0 0 0;">Agendar</a>
+                                @endcan
                             </div>
                         </div>
                     </div>

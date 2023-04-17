@@ -22,9 +22,14 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
+            EstadoSeeder::class,
             PermisoSeeder::class,
             Usuario::class,
-            EstadoSeeder::class,
+            PaisSeeder::class,
+            DepartamentoSeeder::class,
+            EstadoCivilSeeder::class,
+            PersonaSeeer::class,
+            EstadoConsultaSeeder::class,
         ]);
     }
 }

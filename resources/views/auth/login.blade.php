@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
-    <title>Login Cover | CORK - Multipurpose Bootstrap Dashboard Template </title>
+    <title>Iniciar Sesion | Med </title>
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico"/>
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
@@ -25,7 +25,7 @@
                 <div class="form-container">
                     <div class="form-content">
 
-                        <h1 class="">Iniciar Sesión en <a href="index.html"><span class="brand-name">MED</span></a></h1>
+                        <h1 class="">Iniciar Sesión en <a href="#"><span class="brand-name">MED</span></a></h1>
                         {{-- <p class="signup-link">New Here? <a href="auth_register.html">Create an account</a></p> --}}
                         {{-- <form class="text-left" > --}}
                         <form method="POST" action="{{ route('login') }}" class="text-left">

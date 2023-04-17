@@ -18,9 +18,12 @@
                 @include('ui.busqueda')
             </div>
 
-            <div class="col-xl-4 col-lg-4 col-sm-4">
-                <a class="btn btn-primary btn-rounded mb-2" href="{{route('persona.create')}}">Agregar</a>
-            </div>
+            @can('persona.create')
+                <div class="col-xl-4 col-lg-4 col-sm-4">
+                    <a class="btn btn-primary btn-rounded mb-2" href="{{route('persona.create')}}">Agregar</a>
+                </div>
+            @endcan
+
         </div>
 
         <div class="row layout-top-spacing" id="cancel-row">
@@ -81,10 +84,12 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{route('persona.edit', $item)}}"
-                                        class="bs-popover" data-container="body" data-container="body" data-trigger="hover" data-placement="top" data-content="Editar Persona">
-                                            <i class="fas fa-user-edit"></i>
-                                        </a>
+                                        @can('persona.edit')
+                                            <a href="{{route('persona.edit', $item)}}"
+                                            class="bs-popover" data-container="body" data-container="body" data-trigger="hover" data-placement="top" data-content="Editar Persona">
+                                                <i class="fas fa-user-edit"></i>
+                                            </a>
+                                        @endcan
                                     </td>
 
                                 </tr>

@@ -30,9 +30,12 @@
                 </form>
             </div>
 
-            <div class="col-xl-4 col-lg-4 col-sm-4">
-                <a class="btn btn-primary btn-rounded mb-2" href="{{route('especialidad.create')}}">Agregar</a>
-            </div>
+            @can('especialidad.create')
+                <div class="col-xl-4 col-lg-4 col-sm-4">
+                    <a class="btn btn-primary btn-rounded mb-2" href="{{route('especialidad.create')}}">Agregar</a>
+                </div>
+            @endcan
+
         </div>
 
         <div class="row layout-top-spacing" id="cancel-row">
@@ -55,10 +58,12 @@
                                     <td>{{$item->descripcion}}</td>
                                     <td style="text-align: right">{{$item->limite_atencion}}</td>
                                     <td>
-                                        <a href="{{route('especialidad.edit', $item)}}"
-                                        class="bs-popover" data-container="body" data-container="body" data-trigger="hover" data-placement="top" data-content="Editar">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
+                                        @can('especialidad.edit')
+                                            <a href="{{route('especialidad.edit', $item)}}"
+                                            class="bs-popover" data-container="body" data-container="body" data-trigger="hover" data-placement="top" data-content="Editar">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach
