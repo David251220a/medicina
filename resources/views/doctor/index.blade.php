@@ -63,7 +63,7 @@
                                         @endif
                                         {{$sexo}}
                                     </td>
-                                    <td></td>
+                                    <td>{{$item->especialista->descripcion}}</td>
                                     <td>{{$item->celular}}</td>
                                     <td>
                                         @if ($item->estado_id == 1)

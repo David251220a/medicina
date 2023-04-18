@@ -26,13 +26,13 @@ class DoctorController extends Controller
         $search= str_replace('.', '', $request->search);
         if ($request->search){
             $data = Doctor::join('persona as a', 'doctor.persona_id', '=', 'a.id')
-            ->select('a.id','a.documento', 'a.nombre', 'a.apellido', 'a.sexo', 'a.celular', 'doctor.persona_id', 'doctor.estado_id', 'doctor.id AS doctor_id')
+            ->select('a.id','a.documento', 'a.nombre', 'a.apellido', 'a.sexo', 'a.celular', 'doctor.persona_id', 'doctor.estado_id', 'doctor.id AS doctor_id', 'doctor.especialidad_id')
             ->where('a.documento', $search)
             ->orderBy('a.documento', 'ASC')
             ->get();
         }else{
             $data = Doctor::join('persona as a', 'doctor.persona_id', '=', 'a.id')
-            ->select('a.id','a.documento', 'a.nombre', 'a.apellido', 'a.sexo', 'a.celular', 'doctor.persona_id', 'doctor.estado_id', 'doctor.id AS doctor_id')
+            ->select('a.id','a.documento', 'a.nombre', 'a.apellido', 'a.sexo', 'a.celular', 'doctor.persona_id', 'doctor.estado_id', 'doctor.id AS doctor_id', 'doctor.especialidad_id')
             ->orderBy('a.documento', 'ASC')
             ->get();
         }

@@ -8,6 +8,7 @@ use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\EspecialidadController;
 use App\Http\Controllers\GrupoUsuarioController;
 use App\Http\Controllers\InicioController;
+use App\Http\Controllers\LimpiarController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\UsuarioController;
@@ -30,6 +31,8 @@ Route::get('/', [WwwController::class, 'index'])->name('w_inicio');
 Route::get('/nosotros', [WwwController::class, 'sobre_nosotros'])->name('w_sobre_nosotros');
 Route::get('/servicios', [WwwController::class, 'servicios'])->name('w_servicios');
 Route::get('/contacto', [WwwController::class, 'contacto'])->name('w_contacto');
+Route::get('/limpiar', [LimpiarController::class, 'limpiar'])->name('limpiar');
+Route::get('/conectar', [LimpiarController::class, 'conectar'])->name('conectar');
 
 Auth::routes();
 Route::get('/logout', [LoginController::class, 'logout']);
